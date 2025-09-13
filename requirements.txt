@@ -1,0 +1,23 @@
+# Core
+streamlit
+pandas
+numpy
+sqlalchemy
+mysqlclient
+
+# Machine Learning
+scikit-learn
+joblib
+statsmodels
+
+# Visualization & Maps
+matplotlib
+seaborn
+plotly
+folium
+pydeck
+
+# Utilities
+python-dotenv
+loguru
+pytest

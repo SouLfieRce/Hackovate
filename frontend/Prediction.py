@@ -1,17 +1,15 @@
 # frontend/Prediction.py
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
 from backend import prediction
+import pandas as pd
 
 def show():
     st.title("🔮 Passenger Demand Prediction")
 
-    st.write("This page shows forecasted vs actual ridership for upcoming hours.")
-
-    # Dummy data (replace with actual backend call)
     forecast_df = prediction.get_forecast()
 
-    st.line_chart(forecast_df)
+    st.line_chart(forecast_df.set_index("hour"))
 
-    st.info("Model predicts passenger demand for the next few hours.")
+    st.dataframe(forecast_df)
+
+    st.success("✅ Forecast generated using simple ML model.")

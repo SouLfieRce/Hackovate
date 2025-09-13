@@ -1,16 +1,19 @@
 # frontend/Home.py
 import streamlit as st
+from backend import database
 
 def show():
     st.title("🚌 Smart Bus Management System")
     st.write("""
-        Welcome to the **Smart Bus Optimization Dashboard**!  
-        This tool helps optimize city bus schedules using **real-time data, demand prediction, and simulation**.  
-        
-        ### Features:
-        - 📊 Compare Original vs Optimized schedules  
-        - 🔮 Forecast ridership for upcoming hours  
-        - 🚍 Simulate live bus movement and occupancy  
-        - ⚡ Reduce waiting time & bus bunching  
+        Welcome to the **Smart Bus Optimization Dashboard**.  
+        This system uses **SQL + Python backend + ML + Simulation** to make buses run smarter.  
     """)
-    st.success("Use the sidebar to navigate through different modules.")
+
+    # Show quick stats from DB
+    ticket_data = database.fetch_ticket_data()
+
+    if not ticket_data.empty:
+        st.metric("Total Tickets Recorded", len(ticket_data))
+        st.metric("Unique Routes", ticket_data["route"].nunique())
+    else:
+        st.warning("⚠ No ticket data available. Please insert some records into the database.")
